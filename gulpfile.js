@@ -19,16 +19,26 @@ var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
+
 gulp.task('default', ['compile:js', 'compile:css', 'browser-sync', 'nodemon:run'], function () {
   gulp.watch(["./src/js/**/*.js"], ["compile:js"]).on('change', reload);
   gulp.watch(["./src/css/**/*.styl"], ["compile:css"]).on('change', reload);
 });
 
-// gulp.task("jshint", function () {
-//   gulp.src(["./src/js/**/*.js"])
-//     .pipe(jshint())
-//     .pipe(jshint.reporter("jshint-stylish"));
-// });
+gulp.task('nodemon:run', function () {
+  nodemon({
+    script: 'server.js'
+  , ext: 'js html'
+  , env: { 'NODE_ENV': 'development' }
+  })
+})
+
+gulp.task('browser-sync', function() {
+  browserSync({
+    port: 7000,
+    proxy: "http://localhost:3000",
+  });
+});
 
 gulp.task('jshint', function() {
   var stream = gulp.src(["./src/js/**/*.js"])
@@ -50,8 +60,6 @@ gulp.task('jshint', function() {
 });
 
 gulp.task("compile:js", ["jshint"], function () {
-  // var bundle = browserify("./src/js/main.js").bundle();
-
   var b = browserify();
     b.transform(reactify); // use the reactify transform
     b.add('./src/js/main.js');
@@ -61,63 +69,10 @@ gulp.task("compile:js", ["jshint"], function () {
     .pipe(gulp.dest("./public/assets/js"));
 });
 
-
-
 gulp.task("compile:css", function () {
-
   gulp.src('./src/css/**/*.styl')
-    // .pipe(stylus())
     .pipe(stylus({ use: [axis(), jeet(), rupture()], compress: false, 'include css': true }))
     .pipe(csslint())
     .pipe(csslint.reporter())
     .pipe(gulp.dest('./public/assets/css'));
-
-  // return sass('./src/scss/') 
-  //   .on('error', function (err) {
-  //     console.error('Error!', err.message);
-  //  })
-  //   .pipe(csslint())
-  //   .pipe(csslint.reporter())
-  //   .pipe(gulp.dest('./public/assets/css'));
-
-});
-
-gulp.task("watch", ["compile:css", "compile:js"], function () {
-  gulp.watch(["./src/js/**/*.js"], ["compile:js"]);
-  gulp.watch(["./src/css/**/*.styl"], ["compile:css"]);
-});
-
-// gulp.task('nodemon:run', function (cb) {
-//   return nodemon({
-//     script: 'server.js',
-//     ignore: [
-//       './bower_components/**',
-//       './node_modules/**',
-//       './build/**'
-//     ]
-//   }).on('start', function () {
-//     cb();
-//   });
-// });
-
-gulp.task('nodemon:run', function () {
-  nodemon({
-    script: 'server.js'
-  , ext: 'js html'
-  , env: { 'NODE_ENV': 'development' }
-  })
-})
-
-
-// gulp.task('browser-sync', function() {
-//   browserSync({
-//     server: "./public"
-//   });
-// });
-
-gulp.task('browser-sync', function() {
-  browserSync({
-    port: 7000,
-    proxy: "http://localhost:3000",
-  });
 });
