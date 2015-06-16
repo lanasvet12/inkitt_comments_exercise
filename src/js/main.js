@@ -1,16 +1,49 @@
 // var _ = require('underscore');
 
-// var React = require('react');
-// var $ = require('jquery');
+var React = require('react');
+var $ = require('jquery');
 var marked = require('marked');
 
 window.onload = function () {
 };
 
-// var data = [
-//   {author: "Pete Hunt", text: "This is one comment"},
-//   {author: "Jordan Walke", text: "This is *another* comment"}
-// ];
+function getSelectionText() {
+  var text = "";
+  if (window.getSelection) {
+    text = window.getSelection().toString();
+  } else if (document.selection && document.selection.type != "Control") {
+    text = document.selection.createRange().text;
+  }
+  return text;
+}
+
+function getSelectedText() {
+  var text = "";
+  if (typeof window.getSelection != "undefined") {
+    text = window.getSelection().toString();
+  } else if (typeof document.selection != "undefined" && document.selection.type == "Text") {
+    text = document.selection.createRange().text;
+  }
+  return text;
+}
+
+function doSomethingWithSelectedText() {
+  var selectedText = getSelectedText();
+  if (selectedText) {
+
+    $('#infoDiv').css('display', 'block');
+    $('#infoDiv').css('position', 'absolute');
+    $('#infoDiv').css('left', event.clientX + 10);
+    $('#infoDiv').css('top', event.clientY + 15);
+  } else {
+    $('#infoDiv').css('display', 'none');
+  }
+}
+
+document.onmouseup = doSomethingWithSelectedText;
+document.onkeyup = doSomethingWithSelectedText;
+
+// ********** REACT
 
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
@@ -118,5 +151,5 @@ var CommentForm = React.createClass({
 
 React.render(
   <CommentBox url="comments.json" pollInterval={2000} />,
-  document.getElementById('content')
+  document.getElementById('comments')
 );

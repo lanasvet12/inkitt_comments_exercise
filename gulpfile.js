@@ -1,4 +1,9 @@
 var gulp = require('gulp');
+// var concat = require('gulp-concat');
+// var uglify = require('gulp-uglify');
+var react = require('gulp-react');
+// var htmlreplace = require('gulp-html-replace');
+
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 // var sass = require('gulp-ruby-sass');
@@ -10,17 +15,28 @@ var nib = require('nib');
 var axis = require('axis');
 var jeet = require ('jeet');
 var rupture = require ('rupture');
-var React = require('react');
+// var React = require('react');
 var reactify = require('reactify');
-var gulpreact = require('gulp-react');
+// var gulpreact = require('gulp-react');
 var cache = require('gulp-cached');
 var nodemon = require('gulp-nodemon');
 // var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
+// var path = {
+//   HTML: 'src/index.html',
+//   ALL: ['src/js/*.js', 'src/js/**/*.js', 'src/index.html'],
+//   JS: ['src/js/*.js', 'src/js/**/*.js'],
+//   MINIFIED_OUT: 'build.min.js',
+//   DEST_SRC: 'dist/src',
+//   DEST_BUILD: 'dist/build',
+//   DEST: 'dist'
+// };
+
 
 gulp.task('default', ['compile:js', 'compile:css', 'browser-sync', 'nodemon:run'], function () {
+  console.log('Watching files for changes...');
   gulp.watch(["./src/js/**/*.js"], ["compile:js"]).on('change', reload);
   gulp.watch(["./src/css/**/*.styl"], ["compile:css"]).on('change', reload);
 });
@@ -43,7 +59,7 @@ gulp.task('browser-sync', function() {
 gulp.task('jshint', function() {
   var stream = gulp.src(["./src/js/**/*.js"])
     .pipe(cache('jshint'))
-    .pipe(gulpreact())
+    .pipe(react())
     .on('error', function(err) {
       console.error('JSX ERROR in ' + err.fileName);
       console.error(err.message);
@@ -71,7 +87,7 @@ gulp.task("compile:js", ["jshint"], function () {
 
 gulp.task("compile:css", function () {
   gulp.src('./src/css/**/*.styl')
-    .pipe(stylus({ use: [axis(), jeet(), rupture()], compress: false, 'include css': true }))
+    .pipe(stylus({ use: [ axis(), jeet(), rupture() ], compress: false, 'include css': true }))
     .pipe(csslint())
     .pipe(csslint.reporter())
     .pipe(gulp.dest('./public/assets/css'));

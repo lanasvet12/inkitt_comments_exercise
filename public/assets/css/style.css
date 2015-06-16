@@ -7,8 +7,90 @@ p {
   margin: 0.75em 0;
   line-height: 1.6em;
 }
-@media only screen and (max-width: 500px) {
-  p {
-    color: #2ecc40;
-  }
+#container {
+  *zoom: 1;
+  width: auto;
+  max-width: 960px;
+  float: none;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 3em;
+}
+#container:before,
+#container:after {
+  content: '';
+  display: table;
+}
+#container:after {
+  clear: both;
+}
+#content {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 58.8%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+#content:before,
+#content:after {
+  content: '';
+  display: table;
+}
+#content:after {
+  clear: both;
+}
+#content:last-child {
+  margin-right: 0%;
+}
+#comments {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 38.2%;
+  margin-left: 0%;
+  margin-right: 3%;
+}
+#comments:before,
+#comments:after {
+  content: '';
+  display: table;
+}
+#comments:after {
+  clear: both;
+}
+#comments:last-child {
+  margin-right: 0%;
+}
+#comments h1 {
+  font-size: 1.5em;
+}
+#comments h2 {
+  font-size: 1.1em;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+#comments span {
+  margin-top: 0;
+  padding-top: 0;
+}
+#comments p {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 0.9em;
+}
+/*Tooltip div styling */
+.tooltipDiv {
+  display: none;
+  width: 4em;
+  z-index: 101;
+  background-color: #323232;
+  box-shadow: 0px 2px 0px rgba(50,50,50,0.5);
+  padding: 12px 12px 12px 12px;
+  border-radius: 10px 10px 10px 10px;
 }
