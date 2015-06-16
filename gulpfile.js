@@ -11,6 +11,9 @@ var axis = require('axis');
 var jeet = require ('jeet');
 var rupture = require ('rupture');
 var React = require('react');
+var reactify = require('reactify');
+var gulpreact = require('gulp-react');
+var cache = require('gulp-cached');
 // var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
@@ -26,19 +29,44 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task("jshint", function () {
-  gulp.src(["./src/js/**/*.js"])
+// gulp.task("jshint", function () {
+//   gulp.src(["./src/js/**/*.js"])
+//     .pipe(jshint())
+//     .pipe(jshint.reporter("jshint-stylish"));
+// });
+
+gulp.task('jshint', function() {
+  var stream = gulp.src(["./src/js/**/*.js"])
+    .pipe(cache('jshint'))
+    .pipe(gulpreact())
+    .on('error', function(err) {
+      console.error('JSX ERROR in ' + err.fileName);
+      console.error(err.message);
+      this.end();
+    })
     .pipe(jshint())
-    .pipe(jshint.reporter("jshint-stylish"));
+    .pipe(jshint.reporter('jshint-stylish'));
+ 
+  if (process.env.CI) {
+    stream = stream.pipe(jshint.reporter('fail'));
+  }
+ 
+  return stream;
 });
 
 gulp.task("compile:js", ["jshint"], function () {
-  var bundle = browserify("./src/js/main.js").bundle();
+  // var bundle = browserify("./src/js/main.js").bundle();
 
-  return bundle
+  var b = browserify();
+    b.transform(reactify); // use the reactify transform
+    b.add('./src/js/main.js');
+
+  return b.bundle()
     .pipe(source("main.js"))
     .pipe(gulp.dest("./public/assets/js"));
 });
+
+
 
 gulp.task("compile:css", function () {
 
