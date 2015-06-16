@@ -1,12 +1,3 @@
-// var _ = require('underscore');
-
-// var React = require('react');
-// var $ = require('jquery');
-var marked = require('marked');
-
-window.onload = function () {
-};
-
 // var data = [
 //   {author: "Pete Hunt", text: "This is one comment"},
 //   {author: "Jordan Walke", text: "This is *another* comment"}

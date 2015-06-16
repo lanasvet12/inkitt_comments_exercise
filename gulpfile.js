@@ -14,19 +14,14 @@ var React = require('react');
 var reactify = require('reactify');
 var gulpreact = require('gulp-react');
 var cache = require('gulp-cached');
+var nodemon = require('gulp-nodemon');
 // var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
-gulp.task('default', ['compile:js', 'compile:css', 'browser-sync'], function () {
+gulp.task('default', ['compile:js', 'compile:css', 'browser-sync', 'nodemon:run'], function () {
   gulp.watch(["./src/js/**/*.js"], ["compile:js"]).on('change', reload);
   gulp.watch(["./src/css/**/*.styl"], ["compile:css"]).on('change', reload);
-});
-
-gulp.task('browser-sync', function() {
-  browserSync({
-    server: "./public"
-  });
 });
 
 // gulp.task("jshint", function () {
@@ -90,4 +85,39 @@ gulp.task("compile:css", function () {
 gulp.task("watch", ["compile:css", "compile:js"], function () {
   gulp.watch(["./src/js/**/*.js"], ["compile:js"]);
   gulp.watch(["./src/css/**/*.styl"], ["compile:css"]);
+});
+
+// gulp.task('nodemon:run', function (cb) {
+//   return nodemon({
+//     script: 'server.js',
+//     ignore: [
+//       './bower_components/**',
+//       './node_modules/**',
+//       './build/**'
+//     ]
+//   }).on('start', function () {
+//     cb();
+//   });
+// });
+
+gulp.task('nodemon:run', function () {
+  nodemon({
+    script: 'server.js'
+  , ext: 'js html'
+  , env: { 'NODE_ENV': 'development' }
+  })
+})
+
+
+// gulp.task('browser-sync', function() {
+//   browserSync({
+//     server: "./public"
+//   });
+// });
+
+gulp.task('browser-sync', function() {
+  browserSync({
+    port: 7000,
+    proxy: "http://localhost:3000",
+  });
 });
