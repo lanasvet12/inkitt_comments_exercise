@@ -32,15 +32,30 @@ function doSomethingWithSelectedText() {
   var selectedText = getSelectedText();
   if (selectedText) {
     // window.alert(selectedText);
+    var sel = window.getSelection ? window.getSelection() : document.selection.createRange();
+    var range = sel.getRangeAt(0);
+    console.log(sel);
+    console.log(range);
 
-    $('#infoDiv').css('display', 'block');
-    $('#infoDiv').css('position', 'absolute');
-    $('#infoDiv').css('left', event.clientX + 10);
-    $('#infoDiv').css('top', event.clientY - 15);
+    var ancestor = range.commonAncestorContainer;
+    while (ancestor.id != "content" // Check id, class or otherwise
+           && ancestor.parentElement !== null) {
+        ancestor = ancestor.parentElement;
+    }
+
+    if (ancestor.id == "content") {
+      // console.log(ancestor.id);
+      $('#infoDiv').css('display', 'block');
+      $('#infoDiv').css('position', 'absolute');
+      $('#infoDiv').css('left', event.clientX + 10);
+      $('#infoDiv').css('top', event.clientY - 16);
+    } else {
+      $('#infoDiv').css('display', 'none');
+    }
   } else {
     $('#infoDiv').css('display', 'none');
   }
-}
+};
 
 document.onmouseup = doSomethingWithSelectedText;
 document.onkeyup = doSomethingWithSelectedText;
