@@ -5,22 +5,47 @@
 @import 'jeet'
 
 body {
-  font-family: "Helvetica";
-  background-color: white;  
+  // font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  // font-weight: 300;
+  background-color: white; 
+  text-rendering: optimizelegibility; 
 }
 
 p
   paragraph()
   
-#container
-  center(960px)
-  padding-top 3em 
   
+#container
+  center(1200px)
+  padding-top 3em
+  
+#headerHolder
+  col(.55, offset: .05)
+  // stack()
+  padding-bottom 1em 
+
+.clearfix
+  cf()
+
 #content
-  col(.6)
+  col(.55, offset: .05)
+  
+  font-family: freight-text-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+  p
+    paragraph(20px)
+    margin-top 0
+    padding-top 0  
+  
+.sectionHeader
+  font-family: 'Droid Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size 3em 
+  text-rendering: optimizelegibility;
   
 #comments
-  col(.4)
+  col(.35)
+  
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
   
   h1
     font-size 1.5em 
@@ -35,7 +60,62 @@ p
   p
     margin-top 0
     padding-top 0   
-    font-size 0.9em 
+    font-size 0.9em
+    
+.notesHeader
+  font-size 1em
+  font-weight: 500;
+  upcase()
+    
+.hairline
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+  // border: 0;
+  // height: 1px;
+  // color: rgba(0, 0, 0, .3)
+  // background-image: linear-gradient(to right, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, .2));
+    
+.commentAuthor
+  font-size 1em
+  font-weight: 500;
+  
+
+.deletebutton
+  float right
+  color #b31d44 
+  font-size 0.6em
+  
+  a
+    transition: all .125s ease
+    
+    &:link 
+      // color: ranHair
+      color: #b31d44 
+      text-decoration none
+      padding: 0.4em
+      // border-bottom: 1px dashed gray;
+      // border-bottom: 1px dashed gray;
+        
+      // background-image: linear-gradient(to right, white 50%, rgba(255,255,255,0) 0%);
+      // background-position: bottom left;
+      // background-size: 4px 1px;
+      // background-repeat: repeat-x;
+      
+    &:hover 
+      font-size 1.5em 
+      color: #fff !important
+      background-color #b05a71 
+      border-radius: 3px;
+      padding: 0.4em
+      // background-image: linear-gradient(to right, silver 50%, rgba(255,255,255,0) 0%);
+      // border-bottom: 1px dashed ranHair;
+    &:visited 
+      color: #b31d44 
+    &:active 
+      color: #b31d44 
     
 /*Tooltip div styling */
 .tooltipDiv {

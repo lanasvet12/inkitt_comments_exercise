@@ -30342,7 +30342,7 @@ function doSomethingWithSelectedText() {
 document.onmouseup = doSomethingWithSelectedText;
 document.onkeyup = doSomethingWithSelectedText;
 
-// **********
+// ********** REACT
 
 var CommentBox = React.createClass({displayName: "CommentBox",
   loadCommentsFromServer: function() {
@@ -30358,6 +30358,7 @@ var CommentBox = React.createClass({displayName: "CommentBox",
       }.bind(this)
     });
   },
+
   handleCommentSubmit: function(comment) {
     var comments = this.state.data;
     var newComments = comments.concat([comment]);
@@ -30375,6 +30376,29 @@ var CommentBox = React.createClass({displayName: "CommentBox",
       }.bind(this)
     });
   },
+
+  deleteComment: function(commentIndex){
+    var comments = this.state.data;
+
+    // These 2 lines just to refresh faster: i.e without waiting for server response.
+    var newComments = comments.splice(commentIndex, 1);
+    this.setState({data: newComments});
+
+    $.ajax({
+      url: this.props.url,
+      port: 3000,
+      type: 'DELETE',
+      dataType: 'json',
+      data: {"index" : commentIndex},
+      success: function (comments) {
+        this.setState({data: comments});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
   getInitialState: function() {
     return {data: []};
   },
@@ -30385,8 +30409,10 @@ var CommentBox = React.createClass({displayName: "CommentBox",
   render: function() {
     return (
       React.createElement("div", {className: "commentBox"}, 
-        React.createElement("h1", null, "Comments"), 
-        React.createElement(CommentList, {data: this.state.data}), 
+        React.createElement("div", {className: "notesHeader"}, "Notes"), 
+        React.createElement("hr", {className: "hairline"}), 
+        React.createElement(CommentList, {deleteElement: this.deleteComment, data: this.state.data}), 
+        React.createElement("hr", {className: "hairline"}), 
         React.createElement(CommentForm, {onCommentSubmit: this.handleCommentSubmit})
       )
     );
@@ -30394,11 +30420,19 @@ var CommentBox = React.createClass({displayName: "CommentBox",
 });
 
 var Comment = React.createClass({displayName: "Comment",
+  handleClick: function(e){
+    e.preventDefault();
+    var commentIndex = this.props.index;
+    return this.props.onDelete(commentIndex);
+  },
   render: function() {
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
     return (
       React.createElement("div", {className: "comment"}, 
-        React.createElement("h2", {className: "commentAuthor"}, 
+        React.createElement("span", {className: "deletebutton"}, 
+          React.createElement("a", {href: "#", onClick: this.handleClick}, "delete")
+        ), 
+        React.createElement("span", {className: "commentAuthor"}, 
           this.props.author
         ), 
         React.createElement("span", {dangerouslySetInnerHTML: {__html: rawMarkup}})
@@ -30408,14 +30442,17 @@ var Comment = React.createClass({displayName: "Comment",
 });
 
 var CommentList = React.createClass({displayName: "CommentList",
+  handleDelete: function(commentIndex){
+      return this.props.deleteElement(commentIndex);
+    },
   render: function() {
-    var commentNodes = this.props.data.map(function (comment) {
+    var commentNodes = this.props.data.map(function (comment, index) {
       return (
-        React.createElement(Comment, {author: comment.author}, 
+        React.createElement(Comment, {comment: comment, onDelete: this.handleDelete, index: index, key: index, author: comment.author}, 
           comment.text
         )
       );
-    });
+    }.bind(this));
     return (
       React.createElement("div", {className: "commentList"}, 
         commentNodes

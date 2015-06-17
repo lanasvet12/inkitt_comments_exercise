@@ -59,6 +59,7 @@ var CommentBox = React.createClass({
       }.bind(this)
     });
   },
+
   handleCommentSubmit: function(comment) {
     var comments = this.state.data;
     var newComments = comments.concat([comment]);
@@ -76,6 +77,29 @@ var CommentBox = React.createClass({
       }.bind(this)
     });
   },
+
+  deleteComment: function(commentIndex){
+    var comments = this.state.data;
+
+    // These 2 lines just to refresh faster: i.e without waiting for server response.
+    var newComments = comments.splice(commentIndex, 1);
+    this.setState({data: newComments});
+
+    $.ajax({
+      url: this.props.url,
+      port: 3000,
+      type: 'DELETE',
+      dataType: 'json',
+      data: {"index" : commentIndex},
+      success: function (comments) {
+        this.setState({data: comments});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
   getInitialState: function() {
     return {data: []};
   },
@@ -86,8 +110,10 @@ var CommentBox = React.createClass({
   render: function() {
     return (
       <div className="commentBox">
-        <h1>Comments</h1>
-        <CommentList data={this.state.data} />
+        <div className="notesHeader">Notes</div>
+        <hr className="hairline" />
+        <CommentList deleteElement = {this.deleteComment} data={this.state.data} />
+        <hr className="hairline" />
         <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
     );
@@ -95,13 +121,21 @@ var CommentBox = React.createClass({
 });
 
 var Comment = React.createClass({
+  handleClick: function(e){
+    e.preventDefault();
+    var commentIndex = this.props.index;
+    return this.props.onDelete(commentIndex);
+  },
   render: function() {
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
     return (
       <div className="comment">
-        <h2 className="commentAuthor">
+        <span className="deletebutton">
+          <a href="#" onClick={this.handleClick}>delete</a>
+        </span>
+        <span className="commentAuthor">
           {this.props.author}
-        </h2>
+        </span>
         <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
       </div>
     );
@@ -109,14 +143,17 @@ var Comment = React.createClass({
 });
 
 var CommentList = React.createClass({
+  handleDelete: function(commentIndex){
+      return this.props.deleteElement(commentIndex);
+    },
   render: function() {
-    var commentNodes = this.props.data.map(function (comment) {
+    var commentNodes = this.props.data.map(function (comment, index) {
       return (
-        <Comment author={comment.author}>
+        <Comment comment = {comment} onDelete = {this.handleDelete} index = {index} key = {index} author={comment.author}>
           {comment.text}
         </Comment>
       );
-    });
+    }.bind(this));
     return (
       <div className="commentList">
         {commentNodes}

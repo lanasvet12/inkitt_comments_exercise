@@ -28,6 +28,23 @@ app.post('/comments.json', function(req, res) {
   });
 });
 
+/**
+ * Removes a comment from the array at the id position.
+ */
+app.delete('/comments.json', function(req, res) {
+  // comments.splice(req.body.index, 1);
+  // res.setHeader('Content-Type', 'application/json');
+  // res.send(JSON.stringify(comments));
+  fs.readFile('comments.json', function(err, data) {
+    var comments = JSON.parse(data);
+    comments.splice(req.body.index, 1);
+    fs.writeFile('comments.json', JSON.stringify(comments, null, 4), function(err) {
+      res.setHeader('Cache-Control', 'no-cache');
+      res.json(comments);
+    });
+  });
+});
+
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
 });

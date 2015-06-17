@@ -1,6 +1,6 @@
 body {
-  font-family: "Helvetica";
   background-color: #fff;
+  text-rendering: optimizelegibility;
 }
 p {
   font-size: 1rem;
@@ -10,7 +10,7 @@ p {
 #container {
   *zoom: 1;
   width: auto;
-  max-width: 960px;
+  max-width: 1200px;
   float: none;
   display: block;
   margin-right: auto;
@@ -27,14 +27,47 @@ p {
 #container:after {
   clear: both;
 }
+#headerHolder {
+  *zoom: 1;
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 53.650000000000006%;
+  margin-left: 5.15%;
+  margin-right: 3%;
+  padding-bottom: 1em;
+}
+#headerHolder:before,
+#headerHolder:after {
+  content: '';
+  display: table;
+}
+#headerHolder:after {
+  clear: both;
+}
+#headerHolder:last-child {
+  margin-right: 0%;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  content: '';
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
 #content {
   *zoom: 1;
   float: left;
   clear: none;
   text-align: inherit;
-  width: 58.8%;
-  margin-left: 0%;
+  width: 53.650000000000006%;
+  margin-left: 5.15%;
   margin-right: 3%;
+  font-family: freight-text-pro, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 #content:before,
 #content:after {
@@ -47,14 +80,28 @@ p {
 #content:last-child {
   margin-right: 0%;
 }
+#content p {
+  font-size: 20px;
+  margin: 0.75em 0;
+  line-height: 1.6em;
+  margin-top: 0;
+  padding-top: 0;
+}
+.sectionHeader {
+  font-family: 'Droid Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 3em;
+  text-rendering: optimizelegibility;
+}
 #comments {
   *zoom: 1;
   float: left;
   clear: none;
   text-align: inherit;
-  width: 38.2%;
+  width: 33.05%;
   margin-left: 0%;
   margin-right: 3%;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
 }
 #comments:before,
 #comments:after {
@@ -83,6 +130,51 @@ p {
   margin-top: 0;
   padding-top: 0;
   font-size: 0.9em;
+}
+.notesHeader {
+  font-size: 1em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.hairline {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+.commentAuthor {
+  font-size: 1em;
+  font-weight: 500;
+}
+.deletebutton {
+  float: right;
+  color: #b31d44;
+  font-size: 0.6em;
+}
+.deletebutton a {
+  -webkit-transition: all 0.125s ease;
+  -moz-transition: all 0.125s ease;
+  -o-transition: all 0.125s ease;
+  -ms-transition: all 0.125s ease;
+  transition: all 0.125s ease;
+}
+.deletebutton a:link {
+  color: #b31d44;
+  text-decoration: none;
+  padding: 0.4em;
+}
+.deletebutton a:hover {
+  font-size: 1.5em;
+  color: #fff !important;
+  background-color: #b05a71;
+  border-radius: 3px;
+  padding: 0.4em;
+}
+.deletebutton a:visited {
+  color: #b31d44;
+}
+.deletebutton a:active {
+  color: #b31d44;
 }
 /*Tooltip div styling */
 .tooltipDiv {
