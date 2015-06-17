@@ -3,6 +3,7 @@
 var React = require('react');
 var $ = require('jquery');
 var marked = require('marked');
+var findtext = require('findAndReplaceDOMText');
 
 window.onload = function () {
 };
@@ -30,11 +31,12 @@ function getSelectedText() {
 function doSomethingWithSelectedText() {
   var selectedText = getSelectedText();
   if (selectedText) {
+    // window.alert(selectedText);
 
     $('#infoDiv').css('display', 'block');
     $('#infoDiv').css('position', 'absolute');
     $('#infoDiv').css('left', event.clientX + 10);
-    $('#infoDiv').css('top', event.clientY + 15);
+    $('#infoDiv').css('top', event.clientY - 15);
   } else {
     $('#infoDiv').css('display', 'none');
   }

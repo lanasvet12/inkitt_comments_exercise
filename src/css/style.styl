@@ -12,7 +12,7 @@ body {
 }
 
 p
-  paragraph()
+  // paragraph()
   
   
 #container
@@ -22,7 +22,13 @@ p
 #headerHolder
   col(.55, offset: .05)
   // stack()
-  padding-bottom 1em 
+  padding-bottom 2em
+
+.sectionHeader
+  font-family: 'Droid Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
+  // font-weight 700 
+  font-size 3em 
+  text-rendering: optimizelegibility;
 
 .clearfix
   cf()
@@ -32,14 +38,11 @@ p
   
   font-family: freight-text-pro, Georgia, Cambria, "Times New Roman", Times, serif;
   p
-    paragraph(20px)
+    font-size 22px
+    line-height 1.5em 
     margin-top 0
     padding-top 0  
   
-.sectionHeader
-  font-family: 'Droid Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
-  font-size 3em 
-  text-rendering: optimizelegibility;
   
 #comments
   col(.35)
@@ -63,8 +66,8 @@ p
     font-size 0.9em
     
 .notesHeader
-  font-size 1em
-  font-weight: 500;
+  font-size .8em
+  font-weight: 300;
   upcase()
     
 .hairline
@@ -90,10 +93,12 @@ p
   
   a
     transition: all .125s ease
+    border-radius: 3px;
     
     &:link 
       // color: ranHair
       color: #b31d44 
+      background-color rgba(179, 29, 68, .1)  
       text-decoration none
       padding: 0.4em
       // border-bottom: 1px dashed gray;
@@ -108,7 +113,6 @@ p
       font-size 1.5em 
       color: #fff !important
       background-color #b05a71 
-      border-radius: 3px;
       padding: 0.4em
       // background-image: linear-gradient(to right, silver 50%, rgba(255,255,255,0) 0%);
       // border-bottom: 1px dashed ranHair;
@@ -120,11 +124,17 @@ p
 /*Tooltip div styling */
 .tooltipDiv {
   display: none;
-  width: 4em;
+  // width: 4em;
+  color #FFF 
+  
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+  font-size .9em 
+
   z-index: 101;
   background-color: #323232;
   // border: 2px solid #666;
-  box-shadow: 0px 2px 0px rgba(50, 50, 50, .5);
+  // box-shadow: 0px 2px 0px rgba(50, 50, 50, .5);
   padding: 12px 12px 12px 12px;
   border-radius: 10px 10px 10px 10px;
 }

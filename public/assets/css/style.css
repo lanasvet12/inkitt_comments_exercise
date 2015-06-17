@@ -2,11 +2,6 @@ body {
   background-color: #fff;
   text-rendering: optimizelegibility;
 }
-p {
-  font-size: 1rem;
-  margin: 0.75em 0;
-  line-height: 1.6em;
-}
 #container {
   *zoom: 1;
   width: auto;
@@ -35,7 +30,7 @@ p {
   width: 53.650000000000006%;
   margin-left: 5.15%;
   margin-right: 3%;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
 }
 #headerHolder:before,
 #headerHolder:after {
@@ -47,6 +42,11 @@ p {
 }
 #headerHolder:last-child {
   margin-right: 0%;
+}
+.sectionHeader {
+  font-family: 'Droid Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 3em;
+  text-rendering: optimizelegibility;
 }
 .clearfix {
   *zoom: 1;
@@ -81,16 +81,10 @@ p {
   margin-right: 0%;
 }
 #content p {
-  font-size: 20px;
-  margin: 0.75em 0;
-  line-height: 1.6em;
+  font-size: 22px;
+  line-height: 1.5em;
   margin-top: 0;
   padding-top: 0;
-}
-.sectionHeader {
-  font-family: 'Droid Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
-  font-size: 3em;
-  text-rendering: optimizelegibility;
 }
 #comments {
   *zoom: 1;
@@ -132,8 +126,8 @@ p {
   font-size: 0.9em;
 }
 .notesHeader {
-  font-size: 1em;
-  font-weight: 500;
+  font-size: 0.8em;
+  font-weight: 300;
   text-transform: uppercase;
 }
 .hairline {
@@ -157,9 +151,11 @@ p {
   -o-transition: all 0.125s ease;
   -ms-transition: all 0.125s ease;
   transition: all 0.125s ease;
+  border-radius: 3px;
 }
 .deletebutton a:link {
   color: #b31d44;
+  background-color: rgba(179,29,68,0.1);
   text-decoration: none;
   padding: 0.4em;
 }
@@ -167,7 +163,6 @@ p {
   font-size: 1.5em;
   color: #fff !important;
   background-color: #b05a71;
-  border-radius: 3px;
   padding: 0.4em;
 }
 .deletebutton a:visited {
@@ -179,10 +174,12 @@ p {
 /*Tooltip div styling */
 .tooltipDiv {
   display: none;
-  width: 4em;
+  color: #fff;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  font-size: 0.9em;
   z-index: 101;
   background-color: #323232;
-  box-shadow: 0px 2px 0px rgba(50,50,50,0.5);
   padding: 12px 12px 12px 12px;
   border-radius: 10px 10px 10px 10px;
 }
