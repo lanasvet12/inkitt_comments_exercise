@@ -31149,13 +31149,13 @@ var CommentForm = React.createClass({displayName: "CommentForm",
   render: function() {
     return (
       React.createElement("form", {className: "commentForm", onSubmit: this.handleSubmit}, 
-    
-        React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}), 
-        React.createElement("input", {type: "text", placeholder: "Say something...", ref: "text"}), 
+        React.createElement("span", {className: "formHeader"}, "Leave a comment!"), 
+        React.createElement("input", {className: "textInput", type: "text", placeholder: "Your name", ref: "author"}), 
+        React.createElement("input", {className: "textInput", type: "textbox", placeholder: "Say something...", ref: "text"}), 
         React.createElement("div", {id: "hiddenText"}, 
           React.createElement("input", {type: "text", placeholder: "", tabIndex: "-1", ref: "selectedText"})
         ), 
-        React.createElement("input", {type: "submit", value: "Post"}), 
+        React.createElement("input", {className: "submitButton", type: "submit", value: "Post"}), 
 
         React.createElement("div", {className: "tooltipDiv"}, 
           React.createElement("input", {

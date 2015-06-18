@@ -217,13 +217,13 @@ var CommentForm = React.createClass({
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
-    
-        <input type="text" placeholder="Your name" ref="author" />
-        <input type="text" placeholder="Say something..." ref="text" />
+        <span className="formHeader">Leave a comment!</span>
+        <input className="textInput" type="text" placeholder="Your name" ref="author" />
+        <input className="textInput" type="textbox" placeholder="Say something..." ref="text" />
         <div id="hiddenText">
           <input type="text" placeholder="" tabIndex="-1" ref="selectedText" />
         </div>
-        <input type="submit" value="Post" />
+        <input className="submitButton" type="submit" value="Post" />
 
         <div className="tooltipDiv">
           <input
