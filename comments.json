@@ -10,5 +10,20 @@
     {
         "author": "Darren Thompson",
         "text": "I LOVE THIS"
+    },
+    {
+        "selectedText": "e worl",
+        "author": "highlighted",
+        "text": "just a bit"
+    },
+    {
+        "selectedText": "",
+        "author": "What if",
+        "text": "there's nothing?"
+    },
+    {
+        "selectedText": "hild feels",
+        "author": "This one",
+        "text": "is hidden"
     }
 ]

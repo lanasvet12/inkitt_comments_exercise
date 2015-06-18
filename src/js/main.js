@@ -45,15 +45,15 @@ function doSomethingWithSelectedText() {
 
     if (ancestor.id == "content") {
       // console.log(ancestor.id);
-      $('#infoDiv').css('display', 'block');
-      $('#infoDiv').css('position', 'absolute');
-      $('#infoDiv').css('left', event.clientX + 10);
-      $('#infoDiv').css('top', event.clientY - 16);
+      $('.tooltipDiv').css('display', 'block');
+      $('.tooltipDiv').css('position', 'absolute');
+      $('.tooltipDiv').css('left', event.clientX + 10);
+      $('.tooltipDiv').css('top', event.clientY - 16);
     } else {
-      $('#infoDiv').css('display', 'none');
+      $('.tooltipDiv').css('display', 'none');
     }
   } else {
-    $('#infoDiv').css('display', 'none');
+    $('.tooltipDiv').css('display', 'none');
   }
 };
 
@@ -184,21 +184,80 @@ var CommentForm = React.createClass({
     e.preventDefault();
     var author = React.findDOMNode(this.refs.author).value.trim();
     var text = React.findDOMNode(this.refs.text).value.trim();
+    var selectedText = React.findDOMNode(this.refs.selectedText).value.trim();
     if (!text || !author) {
       return;
     }
-    this.props.onCommentSubmit({author: author, text: text});
+    this.props.onCommentSubmit({selectedText: selectedText, author: author, text: text});
     React.findDOMNode(this.refs.author).value = '';
     React.findDOMNode(this.refs.text).value = '';
+    React.findDOMNode(this.refs.selectedText).value = '';
     return;
   },
+
+  handleClickComment: function() {
+    // Explicitly focus the text input using the raw DOM API.
+    React.findDOMNode(this.refs.author).focus();
+    $('.tooltipDiv').css('display', 'none');
+    // console.log("handling click")
+  },
+
+  handleClickHighlight: function() {
+    var highlighted = getSelectedText();
+    console.log(highlighted);
+    // this.setState({highlightedText: highlighted});
+    
+    React.findDOMNode(this.refs.selectedText).value = highlighted;
+    // Explicitly focus the text input using the raw DOM API.
+    React.findDOMNode(this.refs.author).focus();
+    $('.tooltipDiv').css('display', 'none');
+    // console.log("handling click")
+  },
+
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Your name" ref="author" />
         <input type="text" placeholder="Say something..." ref="text" />
+        <div id="hiddenText">
+          <input type="text" placeholder="" tabIndex="-1" ref="selectedText" />
+        </div>
         <input type="submit" value="Post" />
+
+        <div className="tooltipDiv">
+          <input
+            type="button"
+            value="Comment"
+            onClick={this.handleClickComment}
+          />
+          <input
+            type="button"
+            value="Highlight"
+            onClick={this.handleClickHighlight}
+          />
+        </div>
       </form>
+    );
+  }
+});
+
+
+var ToolTip = React.createClass({
+  handleClick: function() {
+    // Explicitly focus the text input using the raw DOM API.
+    React.findDOMNode(this.refs.author).focus();
+  },
+  render: function() {
+    // The ref attribute adds a reference to the component to
+    // this.refs when the component is mounted.
+    return (
+      <div className="tooltipDav">
+        <input
+          type="button"
+          value="Focus the text input"
+          onClick={this.handleClick}
+        />
+      </div>
     );
   }
 });
