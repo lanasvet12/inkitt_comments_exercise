@@ -31111,36 +31111,6 @@ var CommentList = React.createClass({displayName: "CommentList",
   }
 });
 
-var FocusBox = React.createClass({displayName: "FocusBox",
-  getInitialState: function() {
-    return {
-      focused: false
-    };
-  },
-      
-  focus: function() {
-    this.setState({ focused: true });
-  },
-        
-  blur: function() {
-    this.setState({ focused: false });
-  },
-      
-  render: function() {
-    return React.createElement("div", {className: "focus-box" + (this.state.focused ? " focus" : "") + (this.props.error ? " error" : "")}, 
-      React.createElement("div", null, 
-        React.createElement("input", {type: this.props.type || "text", placeholder: this.props.placeholder, ref: this.props.ref, onFocus: this.focus, onBlur: this.blur}), 
-        React.createElement("div", {className: "focus"}, 
-          React.createElement("div", null)
-        )
-      )
-    );
-  }
-});
-
-// <input type="text" placeholder="Say something..." ref="text" />
-
-
 var CommentForm = React.createClass({displayName: "CommentForm",
   handleSubmit: function(e) {
     e.preventDefault();
@@ -31179,9 +31149,8 @@ var CommentForm = React.createClass({displayName: "CommentForm",
   render: function() {
     return (
       React.createElement("form", {className: "commentForm", onSubmit: this.handleSubmit}, 
-        React.createElement("span", {className: "formHeader"}, "Leave a comment!"), 
-        React.createElement(FocusBox, {placeholder: "Your name", ref: "author"}), 
-        
+    
+        React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}), 
         React.createElement("input", {type: "text", placeholder: "Say something...", ref: "text"}), 
         React.createElement("div", {id: "hiddenText"}, 
           React.createElement("input", {type: "text", placeholder: "", tabIndex: "-1", ref: "selectedText"})
@@ -31205,6 +31174,36 @@ var CommentForm = React.createClass({displayName: "CommentForm",
   }
 });
 
+// <FocusBox placeholder="Your name" ref="author" />
+// <FocusBox placeholder="Say something..." ref="text" />
+
+
+var FocusBox = React.createClass({displayName: "FocusBox",
+  getInitialState: function() {
+    return {
+      focused: false
+    };
+  },
+      
+  focus: function() {
+    this.setState({ focused: true });
+  },
+        
+  blur: function() {
+    this.setState({ focused: false });
+  },
+      
+  render: function() {
+    return React.createElement("div", {className: "focus-box" + (this.state.focused ? " focus" : "") + (this.props.error ? " error" : "")}, 
+      React.createElement("div", null, 
+        React.createElement("input", {type: "text", placeholder: this.props.placeholder, ref: this.props.ref, onFocus: this.focus, onBlur: this.blur}), 
+        React.createElement("div", {className: "focus"}, 
+          React.createElement("div", null)
+        )
+      )
+    );
+  }
+});
 
 var ToolTip = React.createClass({displayName: "ToolTip",
   handleClick: function() {

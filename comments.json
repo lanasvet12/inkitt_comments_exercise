@@ -25,5 +25,10 @@
         "selectedText": "hild feels",
         "author": "This one",
         "text": "is hidden"
+    },
+    {
+        "selectedText": "",
+        "author": "It works",
+        "text": "again"
     }
 ]
