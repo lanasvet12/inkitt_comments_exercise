@@ -519,3 +519,28 @@ input.submitButton:active {
   padding: 12px 12px 12px 12px;
   border-radius: 10px 10px 10px 10px;
 }
+.tooltipDiv input {
+  font-size: 13px;
+  padding: 10px 22px;
+  border-radius: 3px;
+  background-color: #aaa;
+  color: #494949;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif;
+  line-height: 1em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  color: #fff;
+  margin-right: 1px;
+}
+.tooltipDiv input:hover,
+.tooltipDiv input:focus {
+  background-color: #a1a1a1;
+  color: #474747;
+}
+.tooltipDiv input:active {
+  background-color: #999;
+}
