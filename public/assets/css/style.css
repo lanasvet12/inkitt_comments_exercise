@@ -193,6 +193,7 @@ input.textInput {
   -o-transition: all .3s ease;
   -ms-transition: all .3s ease;
   transition: all .3s ease;
+  margin-top: 10px;
 }
 input.textInput:focus {
   box-shadow: 0 0 5px rgba(54,27,217,0.7);

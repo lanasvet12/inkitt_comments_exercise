@@ -47,8 +47,8 @@ function doSomethingWithSelectedText() {
       // console.log(ancestor.id);
       $('.tooltipDiv').css('display', 'block');
       $('.tooltipDiv').css('position', 'absolute');
-      $('.tooltipDiv').css('left', event.clientX + 10);
-      $('.tooltipDiv').css('top', event.clientY - 16);
+      $('.tooltipDiv').css('left', window.scrollX + event.clientX + 10);
+      $('.tooltipDiv').css('top', window.scrollY + event.clientY - 16);
     } else {
       $('.tooltipDiv').css('display', 'none');
     }
