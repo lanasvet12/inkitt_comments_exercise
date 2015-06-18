@@ -234,15 +234,9 @@ body {
     float: left;
     clear: none;
     text-align: inherit;
-    width: 100%;
-    margin-left: 0%;
+    width: 89.7%;
+    margin-left: 5.15%;
     margin-right: 3%;
-    display: block;
-    clear: both;
-    float: none;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
   }
   #headerHolder:before,
   #headerHolder:after {
@@ -254,12 +248,6 @@ body {
   }
   #headerHolder:last-child {
     margin-right: 0%;
-  }
-  #headerHolder:first-child {
-    margin-left: auto;
-  }
-  #headerHolder:last-child {
-    margin-right: auto;
   }
 }
 .sectionHeader {
@@ -305,15 +293,9 @@ body {
     float: left;
     clear: none;
     text-align: inherit;
-    width: 100%;
-    margin-left: 0%;
+    width: 89.7%;
+    margin-left: 5.15%;
     margin-right: 3%;
-    display: block;
-    clear: both;
-    float: none;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
   }
   #content:before,
   #content:after {
@@ -325,12 +307,6 @@ body {
   }
   #content:last-child {
     margin-right: 0%;
-  }
-  #content:first-child {
-    margin-left: auto;
-  }
-  #content:last-child {
-    margin-right: auto;
   }
 }
 #content p {
@@ -347,6 +323,7 @@ body {
   width: 33.05%;
   margin-left: 0%;
   margin-right: 3%;
+  padding-bottom: 2em;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 }
@@ -368,7 +345,7 @@ body {
     clear: none;
     text-align: inherit;
     width: 48.5%;
-    margin-left: 0%;
+    margin-left: 5.15%;
     margin-right: 3%;
   }
   #comments:before,
@@ -389,8 +366,8 @@ body {
     float: left;
     clear: none;
     text-align: inherit;
-    width: 100%;
-    margin-left: 0%;
+    width: 89.7%;
+    margin-left: 5.15%;
     margin-right: 3%;
   }
   #comments:before,

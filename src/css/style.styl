@@ -29,8 +29,8 @@ p
   padding-bottom 2em
   
   +below(3)
-    col(1)
-    stack()
+    col(.9, offset: .05)
+    // stack()  
 
 .sectionHeader
   font-family: 'Droid Serif', Georgia, Cambria, 'Times New Roman', Times, serif;
@@ -44,8 +44,8 @@ p
 #content
   col(.55, offset: .05)
   +below(3)
-    col(1)
-    stack()
+    col(.9, offset: .05)
+    // stack()
   
   font-family: freight-text-pro, Georgia, Cambria, "Times New Roman", Times, serif;
   p
@@ -58,10 +58,12 @@ p
 #comments
   col(.35)
   +below(3)
-    col(.5)
+    col(.5, offset: .05)
     // stack()
   +below(2)
-    col(1)
+    col(.9, offset: .05)
+    
+  padding-bottom 2em 
   
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
