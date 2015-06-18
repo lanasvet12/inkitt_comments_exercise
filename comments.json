@@ -1,6 +1,17 @@
 [
     {
-        "author": "Travis Bickle",
-        "text": "Allllriiiighty then"
+        "selectedText": "",
+        "author": "Nick Splendorr",
+        "text": "Hey, this thing actually works! :)"
+    },
+    {
+        "selectedText": "",
+        "author": "Nick Splendorr",
+        "text": "Of course it does, silly."
+    },
+    {
+        "selectedText": "feels the power of words awaken within them. They delight to discover",
+        "author": "Nick Splendorr",
+        "text": "This one has highlight text."
     }
 ]
