@@ -30935,7 +30935,7 @@ module.exports = require('./lib/React');
 var React = require('react');
 var $ = require('jquery');
 var marked = require('marked');
-var findtext = require('findAndReplaceDOMText');
+var findAndReplaceDOMText = require('findandreplacedomtext');
 
 window.onload = function () {
 };
@@ -31077,6 +31077,18 @@ var Comment = React.createClass({displayName: "Comment",
   },
   render: function() {
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+    var stringSelectedText = this.props.selectedText;
+    console.log(stringSelectedText);
+    var regexSelectedText = "/" + stringSelectedText + "/"
+    console.log(regexSelectedText);
+    var re = new RegExp(stringSelectedText, "");
+    console.log(re);
+    if (stringSelectedText !== "") {
+      findAndReplaceDOMText(document.getElementById('content'), {
+        find: re,
+        wrap: 'em'
+      });
+    };
     return (
       React.createElement("div", {className: "comment"}, 
         React.createElement("span", {className: "deletebutton"}, 
@@ -31098,7 +31110,7 @@ var CommentList = React.createClass({displayName: "CommentList",
   render: function() {
     var commentNodes = this.props.data.map(function (comment, index) {
       return (
-        React.createElement(Comment, {comment: comment, onDelete: this.handleDelete, index: index, key: index, author: comment.author}, 
+        React.createElement(Comment, {comment: comment, onDelete: this.handleDelete, index: index, key: index, author: comment.author, selectedText: comment.selectedText}, 
           comment.text
         )
       );
@@ -31230,4 +31242,4 @@ React.render(
   document.getElementById('comments')
 );
 
-},{"findAndReplaceDOMText":2,"jquery":3,"marked":4,"react":159}]},{},[160]);
+},{"findandreplacedomtext":2,"jquery":3,"marked":4,"react":159}]},{},[160]);

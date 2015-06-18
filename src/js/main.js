@@ -3,7 +3,7 @@
 var React = require('react');
 var $ = require('jquery');
 var marked = require('marked');
-var findtext = require('findAndReplaceDOMText');
+var findAndReplaceDOMText = require('findandreplacedomtext');
 
 window.onload = function () {
 };
@@ -145,6 +145,18 @@ var Comment = React.createClass({
   },
   render: function() {
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+    var stringSelectedText = this.props.selectedText;
+    console.log(stringSelectedText);
+    var regexSelectedText = "/" + stringSelectedText + "/"
+    console.log(regexSelectedText);
+    var re = new RegExp(stringSelectedText, "");
+    console.log(re);
+    if (stringSelectedText !== "") {
+      findAndReplaceDOMText(document.getElementById('content'), {
+        find: re,
+        wrap: 'em'
+      });
+    };
     return (
       <div className="comment">
         <span className="deletebutton">
@@ -166,7 +178,7 @@ var CommentList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function (comment, index) {
       return (
-        <Comment comment = {comment} onDelete = {this.handleDelete} index = {index} key = {index} author={comment.author}>
+        <Comment comment = {comment} onDelete = {this.handleDelete} index = {index} key = {index} author={comment.author} selectedText={comment.selectedText} >
           {comment.text}
         </Comment>
       );
