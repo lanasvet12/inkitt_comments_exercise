@@ -4,12 +4,12 @@
 // @import 'axis'
 @import 'jeet'
 
-body {
+body 
   // font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   // font-weight: 300;
   background-color: white; 
   text-rendering: optimizelegibility; 
-}
+
 
 p
   // paragraph()
@@ -83,7 +83,11 @@ p
     
 .commentAuthor
   font-size 1em
-  font-weight: 500;
+  font-weight: 700;
+  line-height 1.5em 
+  // padding-bottom 1em 
+  // p
+  //   line-height 2em  
   
 
 .deletebutton
@@ -120,6 +124,15 @@ p
       color: #b31d44 
     &:active 
       color: #b31d44 
+      
+.formHeader
+  color rgba(0, 0, 0, 0.4); 
+
+input.submitButton
+  // button()
+  margin-top 10px
+  // float right
+  width 100%  
     
 #hiddenText
   position absolute 
@@ -127,7 +140,7 @@ p
   
   
 /*Tooltip div styling */
-.tooltipDiv {
+.tooltipDiv 
   display: none;
   // width: 4em;
   color #FFF 
@@ -142,4 +155,93 @@ p
   // box-shadow: 0px 2px 0px rgba(50, 50, 50, .5);
   padding: 12px 12px 12px 12px;
   border-radius: 10px 10px 10px 10px;
-}
+
+
+div.focus-box 
+  float:left;
+  display:block;
+  // width:250px;
+  width 100% 
+  border:solid 1px
+  border-color #AAA;
+  // padding  
+  // margin-right:15px;
+  margin-top:10px;
+  z-index 1
+  transition all ease 250ms
+
+  div 
+    float:left;
+    width:100%;
+    text-align:inherit;
+
+    input 
+      z-index 0
+      -ms-box-sizing:content-box;
+      -moz-box-sizing:content-box;
+      -webkit-box-sizing:content-box; 
+      box-sizing:content-box;
+      
+      float:left;
+      width:95%;
+      -webkit-appearance:none;
+      text-align:inherit;
+      // padding:@spacing;
+      // padding 1em
+      padding-top 0.5em 
+      padding-bottom 0.5em
+      padding-left 0.5em 
+      // padding-right -0.5em 
+      // margin 1em 
+      // margin-right 1em
+      // padding-right -1em  
+      border:none;
+      font-size:0.875em;
+      // background:white;
+      background:transparent;
+      outline:none;
+      // .border-box;
+      border-box
+      // border-radius 3em
+      // .border-radius;
+      transition background ease 250ms
+    
+
+    div.focus 
+      float:left;
+      width:100%;
+      margin-top:-1px;
+      position:relative;
+      height:1px;
+      background:transparent; 
+      border-color:transparent;
+
+      div 
+        position:absolute;
+        z-index:2;
+        width:100%;
+        transform scale(0, 1)
+        height:2px;
+        margin-top:-1px;
+        // background:@select-colour;
+        background-color green 
+        transition all ease 250ms
+      
+    
+  
+
+  &.focus 
+    .focus-box
+      border-color green 
+    // input  background:rgba(222, 233, 250, 0.9) !important; 
+    div.focus>div  
+      transform scale(1, 1) !important; 
+  
+  &.error 
+    div.focus>div  
+      background:red !important;   
+  
+  &.focus.error 
+    input  
+      background:rgba(255, 0, 0, 0.125) !important; 
+  

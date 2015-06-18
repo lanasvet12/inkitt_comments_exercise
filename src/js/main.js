@@ -179,6 +179,36 @@ var CommentList = React.createClass({
   }
 });
 
+var FocusBox = React.createClass({
+  getInitialState: function() {
+    return {
+      focused: false
+    };
+  },
+      
+  focus: function() {
+    this.setState({ focused: true });
+  },
+        
+  blur: function() {
+    this.setState({ focused: false });
+  },
+      
+  render: function() {
+    return <div className={"focus-box" + (this.state.focused ? " focus" : "") + (this.props.error ? " error" : "")}>
+      <div>
+        <input type={this.props.type || "text"} placeholder={this.props.placeholder} ref={this.props.ref} onFocus={this.focus} onBlur={this.blur} />
+        <div className="focus">
+          <div></div>
+        </div>
+      </div>
+    </div>;
+  }
+});
+
+// <input type="text" placeholder="Say something..." ref="text" />
+
+
 var CommentForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
@@ -217,7 +247,9 @@ var CommentForm = React.createClass({
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="Your name" ref="author" />
+        <span className="formHeader">Leave a comment!</span>
+        <FocusBox placeholder="Your name" ref="author" />
+        
         <input type="text" placeholder="Say something..." ref="text" />
         <div id="hiddenText">
           <input type="text" placeholder="" tabIndex="-1" ref="selectedText" />
