@@ -12,9 +12,18 @@
 </head>
 
   <body>
+    <div class="App-wrapper">
+    <div class="App-content">
     <div id="container">
       <div class="clearfix">
-        <div id="headerHolder">
+         <div id="headerHolder">          
+              <div class="App-header">
+                 <img src={logo} class="App-logo" alt="logo" />
+                   <p>
+                  Comments 
+                    </p>
+          <a class="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">Read more</a>
+           </div>
           <div class="sectionHeader">
             Made of the same wordstuff
           </div>
@@ -29,6 +38,13 @@
         <div id="comments"></div>
       </div> <!-- clearfix -->
     </div>
+    </div>
+    <footer className="App-footer">
+         <p>
+            Lana Havryliuk
+          </p>
+     </footer>
+           </div>
     <!-- // <script type="text/jsx;harmony=true" src="scripts/example.js"></script> -->
     <!-- // <script type="text/jsx;harmony=true" src="assets/js/nos.js"></script> -->
     <script type="text/jsx;harmony=true" src="assets/js/main.js"></script>
